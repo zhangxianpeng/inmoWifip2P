@@ -20,7 +20,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Random;
 
 public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
 
@@ -46,8 +45,8 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
         progressDialog.show();
     }
 
-    private String getOutputFilePath(Uri fileUri, String fileType) throws Exception {
-        String outputFilePath = context.getExternalCacheDir().getAbsolutePath() + File.separatorChar + new Random().nextInt(10000) + new Random().nextInt(10000) + "." + fileType;
+    private String getOutputFilePath(Uri fileUri, String fileType, String fileName) throws Exception {
+        String outputFilePath = context.getExternalCacheDir().getAbsolutePath() + File.separatorChar + fileName + "." + fileType;
         File outputFile = new File(outputFilePath);
         if (!outputFile.exists()) {
             outputFile.getParentFile().mkdirs();
@@ -68,8 +67,9 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
             String hostAddress = params[0].toString();
             Uri imageUri = Uri.parse(params[1].toString());
             String fileType = params[2].toString();
+            String oldfileName = params[3].toString();
 
-            String outputFilePath = getOutputFilePath(imageUri, fileType);
+            String outputFilePath = getOutputFilePath(imageUri, fileType, oldfileName);
             File outputFile = new File(outputFilePath);
 
             FileTransfer fileTransfer = new FileTransfer();

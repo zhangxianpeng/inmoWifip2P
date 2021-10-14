@@ -235,9 +235,10 @@ public class SendFileActivity extends BaseActivity {
                     Log.e(TAG, "文件路径：" + imageUri);
                     String filePath = FileUtils.getPath(SendFileActivity.this, imageUri);
                     String fileType = FileUtils.getFileType(filePath);
+                    String fileName = FileUtils.getFileName(filePath);
                     currentItem += 1;
                     if (wifiP2pInfo != null) {
-                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), imageUri, fileType);
+                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), imageUri, fileType, fileName);
                     }
                 }
 //                Uri imageUri = data.getData();
@@ -253,9 +254,10 @@ public class SendFileActivity extends BaseActivity {
                     Uri uri = data.getData();
                     String filePath = FileUtils.getPath(this, uri);
                     String fileType = FileUtils.getFileType(filePath);
+                    String fileName = FileUtils.getFileName(filePath);
                     Log.d("onActivityResult: ", filePath);
                     if (wifiP2pInfo != null) {
-                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), uri, fileType);
+                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), uri, fileType, fileName);
                     }
                 }
             }

@@ -237,6 +237,16 @@ public class FileUtils {
         }
     }
 
+    public static String getFileName(String filePath) {
+        int start=filePath.lastIndexOf("/");
+        int end=filePath.lastIndexOf(".");
+        if(start!=-1 && end!=-1){
+            return filePath.substring(start+1,end);
+        }else{
+            return "";
+        }
+    }
+
     public static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
