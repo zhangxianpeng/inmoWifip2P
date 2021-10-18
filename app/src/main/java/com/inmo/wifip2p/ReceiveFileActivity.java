@@ -226,7 +226,7 @@ public class ReceiveFileActivity extends BaseActivity {
 
     private void log(String log) {
         tv_log.append(log + "\n");
-        tv_log.append("----------" + "\n");
+        tv_log.append("Receive----------" + "\n");
     }
 
     private void bindService() {

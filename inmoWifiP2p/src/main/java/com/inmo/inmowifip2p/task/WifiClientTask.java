@@ -1,7 +1,6 @@
 package com.inmo.inmowifip2p.task;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,25 +23,29 @@ import java.net.Socket;
 public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
 
     private static final String TAG = "WifiClientTask";
+    private OnProgressChangListener progressChangListener;
 
-    private final ProgressDialog progressDialog;
+//    private final ProgressDialog progressDialog;
 
     @SuppressLint("StaticFieldLeak")
     private final Context context;
 
     public WifiClientTask(Context context) {
         this.context = context.getApplicationContext();
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setTitle("正在发送文件");
-        progressDialog.setMax(100);
+//        progressDialog = new ProgressDialog(context);
+//        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+//        progressDialog.setCancelable(false);
+//        progressDialog.setCanceledOnTouchOutside(false);
+//        progressDialog.setTitle("正在发送文件");
+//        progressDialog.setMax(100);
     }
 
     @Override
     protected void onPreExecute() {
-        progressDialog.show();
+//        progressDialog.show();
+        if (progressChangListener != null) {
+            progressChangListener.onStart();
+        }
     }
 
     private String getOutputFilePath(Uri fileUri, String fileType, String fileName) throws Exception {
@@ -161,13 +164,25 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-        progressDialog.setProgress(values[0]);
+//        progressDialog.setProgress(values[0]);
+        if (progressChangListener != null) {
+            progressChangListener.onProgressChanged(values[0]);
+        }
     }
 
     @Override
     protected void onPostExecute(Boolean aBoolean) {
-        progressDialog.cancel();
+//        progressDialog.cancel();
         Log.e(TAG, "onPostExecute: " + aBoolean);
     }
 
+    public interface OnProgressChangListener {
+        void onStart();
+
+        void onProgressChanged(int progress);
+    }
+
+    public void setProgressChangListener(OnProgressChangListener progressChangListener) {
+        this.progressChangListener = progressChangListener;
+    }
 }

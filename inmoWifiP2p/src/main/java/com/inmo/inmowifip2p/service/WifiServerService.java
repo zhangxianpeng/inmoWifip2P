@@ -25,15 +25,10 @@ import java.net.Socket;
 public class WifiServerService extends IntentService {
 
     private static final String TAG = "WifiServerService";
-
     private ServerSocket serverSocket;
-
     private InputStream inputStream;
-
     private ObjectInputStream objectInputStream;
-
     private FileOutputStream fileOutputStream;
-
     private OnProgressChangListener progressChangListener;
 
     public WifiServerService() {
@@ -146,13 +141,10 @@ public class WifiServerService extends IntentService {
     }
 
     public interface OnProgressChangListener {
-
         //当传输进度发生变化时
         void onProgressChanged(FileTransfer fileTransfer, int progress);
-
         //当传输结束时
         void onTransferFinished(File file);
-
     }
 
     public class WifiServerBinder extends Binder {

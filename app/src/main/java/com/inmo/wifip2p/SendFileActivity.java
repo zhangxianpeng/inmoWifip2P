@@ -238,7 +238,21 @@ public class SendFileActivity extends BaseActivity {
                     String fileName = FileUtils.getFileName(filePath);
                     currentItem += 1;
                     if (wifiP2pInfo != null) {
-                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), imageUri, fileType, fileName);
+                        WifiClientTask wifiClientTask = new WifiClientTask(this);
+                        wifiClientTask.execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), imageUri, fileType, fileName);
+                        int finalCurrentItem = currentItem;
+                        wifiClientTask.setProgressChangListener(new WifiClientTask.OnProgressChangListener() {
+                            @Override
+                            public void onStart() {
+                                Log.e(TAG,"111111111111111111111111111111");
+                            }
+
+                            @Override
+                            public void onProgressChanged(int progress) {
+                                Log.e(TAG,"onProgressChanged=" + progress  + "currentItem======" + finalCurrentItem);
+                            }
+                        });
+//                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), imageUri, fileType, fileName);
                     }
                 }
 //                Uri imageUri = data.getData();
