@@ -82,7 +82,6 @@ public class WifiServerService extends IntentService {
             inputStream = null;
             objectInputStream = null;
             fileOutputStream = null;
-            Log.e(TAG, "文件接收成功，文件的MD5码是：" + Md5Util.getMd5(file));
         } catch (Exception e) {
             Log.e(TAG, "文件接收 Exception: " + e.getMessage());
         } finally {

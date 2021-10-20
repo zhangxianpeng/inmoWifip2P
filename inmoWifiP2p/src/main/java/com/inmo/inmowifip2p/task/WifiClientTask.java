@@ -77,14 +77,9 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
 
             FileTransfer fileTransfer = new FileTransfer();
             String fileName = outputFile.getName();
-            String fileMa5 = Md5Util.getMd5(outputFile);
             long fileLength = outputFile.length();
             fileTransfer.setFileName(fileName);
-            fileTransfer.setMd5(fileMa5);
             fileTransfer.setFileLength(fileLength);
-
-            Log.e(TAG, "文件的MD5码值是：" + fileTransfer.getMd5());
-
             socket = new Socket();
             socket.bind(null);
             socket.connect((new InetSocketAddress(hostAddress, Constants.PORT)), 10000);

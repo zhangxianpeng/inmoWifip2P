@@ -5,10 +5,7 @@ import java.io.Serializable;
 public class FileTransfer implements Serializable {
 
     private String fileName;
-
     private long fileLength;
-
-    private String md5;
 
     public String getFileName() {
         return fileName;
@@ -25,13 +22,4 @@ public class FileTransfer implements Serializable {
     public void setFileLength(long fileLength) {
         this.fileLength = fileLength;
     }
-
-    public String getMd5() {
-        return md5;
-    }
-
-    public void setMd5(String md5) {
-        this.md5 = md5;
-    }
-
 }
