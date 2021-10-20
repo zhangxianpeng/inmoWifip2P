@@ -101,6 +101,9 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
                 total += len;
                 int progress = (int) ((total * 100) / fileSize);
                 publishProgress(progress);
+                if(progressChangListener!=null) {
+                    progressChangListener.onProgressChanged(progress);
+                }
                 Log.e(TAG, "文件发送进度：" + progress);
             }
             socket.close();
@@ -115,6 +118,9 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
             return true;
         } catch (Exception e) {
             Log.e(TAG, "文件发送异常 Exception: " + e.getMessage());
+            if(progressChangListener!=null) {
+                progressChangListener.onFail(e);
+            }
         } finally {
             if (socket != null && !socket.isClosed()) {
                 try {
@@ -165,9 +171,9 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
     @Override
     protected void onProgressUpdate(Integer... values) {
 //        progressDialog.setProgress(values[0]);
-        if (progressChangListener != null) {
-            progressChangListener.onProgressChanged(values[0]);
-        }
+//        if (progressChangListener != null) {
+//            progressChangListener.onProgressChanged(values[0]);
+//        }
     }
 
     @Override
@@ -180,6 +186,8 @@ public class WifiClientTask extends AsyncTask<Object, Integer, Boolean> {
         void onStart();
 
         void onProgressChanged(int progress);
+
+        void onFail(Exception e);
     }
 
     public void setProgressChangListener(OnProgressChangListener progressChangListener) {

@@ -251,6 +251,11 @@ public class SendFileActivity extends BaseActivity {
                             public void onProgressChanged(int progress) {
                                 Log.e(TAG,"onProgressChanged=" + progress  + "currentItem======" + finalCurrentItem);
                             }
+
+                            @Override
+                            public void onFail(Exception e) {
+
+                            }
                         });
 //                        new WifiClientTask(this).execute(wifiP2pInfo.groupOwnerAddress.getHostAddress(), imageUri, fileType, fileName);
                     }
@@ -287,7 +292,7 @@ public class SendFileActivity extends BaseActivity {
         if (config.deviceAddress != null && mWifiP2pDevice != null) {
             config.deviceAddress = mWifiP2pDevice.deviceAddress;
             config.wps.setup = WpsInfo.PBC;
-            showLoadingDialog("正在连接 " + mWifiP2pDevice.deviceName);
+            showToast("正在连接 " + mWifiP2pDevice.deviceName);
             wifiP2pManager.connect(channel, config, new WifiP2pManager.ActionListener() {
                 @Override
                 public void onSuccess() {
