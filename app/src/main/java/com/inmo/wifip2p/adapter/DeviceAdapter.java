@@ -1,5 +1,6 @@
 package com.inmo.wifip2p.adapter;
 
+import android.content.Context;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,13 @@ import java.util.List;
 public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder> {
 
     private final List<WifiP2pDevice> wifiP2pDeviceList;
+    private Context mContext;
 
     private OnClickListener clickListener;
 
-    public DeviceAdapter(List<WifiP2pDevice> wifiP2pDeviceList) {
+    public DeviceAdapter(Context context, List<WifiP2pDevice> wifiP2pDeviceList) {
         this.wifiP2pDeviceList = wifiP2pDeviceList;
+        this.mContext = context;
     }
 
     @NonNull
@@ -40,7 +43,7 @@ public class DeviceAdapter extends RecyclerView.Adapter<DeviceAdapter.ViewHolder
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.tv_deviceName.setText(wifiP2pDeviceList.get(position).deviceName);
         holder.tv_deviceAddress.setText(wifiP2pDeviceList.get(position).deviceAddress);
-        holder.tv_deviceDetails.setText(WifiP2pUtils.getDeviceStatus(wifiP2pDeviceList.get(position).status));
+        holder.tv_deviceDetails.setText(WifiP2pUtils.getDeviceStatus(mContext, wifiP2pDeviceList.get(position).status));
         holder.itemView.setTag(position);
     }
 

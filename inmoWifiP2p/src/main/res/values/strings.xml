@@ -1,0 +1,10 @@
+<resources>
+    <string-array name="wifi_p2p_status">
+        <item>Available</item>
+        <item>Inviting</item>
+        <item>Connected</item>
+        <item>Failed</item>
+        <item>Unavailable</item>
+        <item>Unknown</item>
+    </string-array>
+</resources>

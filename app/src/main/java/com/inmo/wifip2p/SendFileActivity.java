@@ -132,7 +132,7 @@ public class SendFileActivity extends BaseActivity {
             Log.e(TAG, "Status: " + wifiP2pDevice.status);
             tv_myDeviceName.setText(wifiP2pDevice.deviceName);
             tv_myDeviceAddress.setText(wifiP2pDevice.deviceAddress);
-            tv_myDeviceStatus.setText(WifiP2pUtils.getDeviceStatus(wifiP2pDevice.status));
+            tv_myDeviceStatus.setText(WifiP2pUtils.getDeviceStatus(SendFileActivity.this, wifiP2pDevice.status));
         }
 
         @Override
@@ -204,7 +204,7 @@ public class SendFileActivity extends BaseActivity {
         loadingDialog = new LoadingDialog(this);
         RecyclerView rv_deviceList = findViewById(R.id.rv_deviceList);
         wifiP2pDeviceList = new ArrayList<>();
-        deviceAdapter = new DeviceAdapter(wifiP2pDeviceList);
+        deviceAdapter = new DeviceAdapter(this, wifiP2pDeviceList);
         deviceAdapter.setClickListener(position -> {
             mWifiP2pDevice = wifiP2pDeviceList.get(position);
             showToast(mWifiP2pDevice.deviceName);
@@ -244,12 +244,12 @@ public class SendFileActivity extends BaseActivity {
                         wifiClientTask.setProgressChangListener(new WifiClientTask.OnProgressChangListener() {
                             @Override
                             public void onStart() {
-                                Log.e(TAG,"111111111111111111111111111111");
+                                Log.e(TAG, "111111111111111111111111111111");
                             }
 
                             @Override
                             public void onProgressChanged(int progress) {
-                                Log.e(TAG,"onProgressChanged=" + progress  + "currentItem======" + finalCurrentItem);
+                                Log.e(TAG, "onProgressChanged=" + progress + "currentItem======" + finalCurrentItem);
                             }
 
                             @Override

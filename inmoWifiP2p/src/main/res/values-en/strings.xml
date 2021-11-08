@@ -1,0 +1,10 @@
+<resources>
+    <string-array name="wifi_p2p_status">
+        <item>可用的</item>
+        <item>邀请中</item>
+        <item>已连接</item>
+        <item>失败的</item>
+        <item>不可用的</item>
+        <item>未知</item>
+    </string-array>
+</resources>
